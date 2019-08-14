@@ -19,3 +19,7 @@ $theme: mat-light-theme($primary, $accent);
 
   @include angular-material-theme($theme);
 }
+
+.mat-drawer-content {
+  overflow: hidden !important;
+}
