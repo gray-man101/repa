@@ -1,6 +1,7 @@
 import { Component, Optional } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  token: string;
   isDarkTheme = false;
   lastDialogResult: string;
   mode: string;
@@ -59,7 +61,10 @@ export class AppComponent {
     { name: 'Warn', color: 'warn' }
   ];
 
-  constructor(private _dialog: MatDialog, private _snackbar: MatSnackBar) {
+  constructor(private _dialog: MatDialog, private _snackbar: MatSnackBar, private route: ActivatedRoute) {
+    route.queryParams.subscribe(params => {
+      this.token = params['token'];
+    });
     // Update the value for the progress-bar on an interval.
     setInterval(() => {
       this.progress = (this.progress + Math.floor(Math.random() * 4) + 1) % 100;
